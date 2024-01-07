@@ -8,7 +8,7 @@ export default function AboutUs() {
             <Nav />
             <h1 class="font-semibold text-title text-center text-white text-7xl mt-10"> About Us</h1>
 
-            <p class="font-semibold text-title text-center text-neutral-200 text-2xl mt-16"> Ai Explorer Description</p>
+            <p class="font-semibold text-title text-center text-neutral-200 text-2xl mt-12"> Ai Explorer Description</p>
 
             <div className="relative mt-32 ml-48"> {/*Alex Description*/}
                 <Image 
