@@ -1,4 +1,4 @@
-import Nav from "@/app/components/navbar"
+import Nav from "@/app/components/navbarEvents"
 import Footer from "@/app/components/footer"
 
 export default function Events() {
