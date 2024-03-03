@@ -5,10 +5,10 @@ const SideNavbar = ({ isOpen, toggle }) => {
   return (
     <nav className={isOpen ? 'sidebar open' : 'sidebar'}>
       <div className="sidebar-header">
-        <h3>My Sidebar</h3>
-        <button className="close-btn" onClick={toggle}>
+        <h3>Units</h3>
+        {/* <button className="close-btn" onClick={toggle}>
           &times;
-        </button>
+        </button> */}
       </div>
       <ul className="sidebar-menu">
       <li>

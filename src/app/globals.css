@@ -84,7 +84,8 @@ body {
 }
 
 .sidebar-menu li a:hover {
-  background-color: #555;
+  background-color: #c0c0c0;
+  color:black;
 }
 
 .close-btn {
