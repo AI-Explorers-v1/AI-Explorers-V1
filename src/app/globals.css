@@ -30,60 +30,62 @@ body {
   margin-top: 24px;
 }
 
+/* Example CSS */
 .sidebar {
-  position: fixed;
-  top: 0;
-  left: 0px;
-  height: 100%;
-  width: 250px;
-  background-color: #ffffff;
-  transition: all 0.3s ease;
-  z-index: 1000;
-}
-
-.sidebar-container {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-}
-.sidebar-opened {
-  transform: translateX(250px); /* Adjust this value according to your sidebar width */
+  position: fixed; /* Change to fixed to keep it in place on scroll */
+  top: 60px; /* Adjust this value according to the height of your top navbar */
+  left: -200px; /* Initially hide the sidebar off screen */
+  width: 200px; /* Adjust the width as needed */
+  background-color: #333; /* Adjust background color */
+  padding: 10px 0;
+  overflow-x: hidden;
+  transition: 0.5s;
+  z-index: 1; /* Ensure it stays on top of other content */
 }
 
 .sidebar.open {
-  left: -250px;
+  left: 0; /* Slide the sidebar in when open */
 }
 
 .sidebar-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-  background-color: #6d6d6d;
+  padding: 10px 15px;
+  background: #444; /* Adjust background color */
+  color: white;
 }
 
 .sidebar-menu {
   list-style-type: none;
   padding: 0;
-  margin: 20px;
 }
 
 .sidebar-menu li {
-  margin-bottom: 10px;
+  padding: 8px 16px;
+  text-align: left;
 }
 
 .sidebar-menu li a {
-  display: block;
-  padding: 10px;
-  color: rgb(0, 0, 0);
+  color: white;
   text-decoration: none;
-  transition: background-color 0.3s ease;
+  display: block;
+  transition: 0.3s;
 }
 
 .sidebar-menu li a:hover {
-  background-color: #c0c0c0;
-  color:black;
+  background-color: #575757;
 }
+
+.toggle-button {
+  position: fixed;
+  top: 10px;
+  left: 10px;
+  background-color: #333;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  cursor: pointer;
+  z-index: 2; /* Ensure the button is above other content */
+}
+
 
 .close-btn {
   background: none;
