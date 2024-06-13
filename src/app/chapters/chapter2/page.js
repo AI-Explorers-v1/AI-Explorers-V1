@@ -6,7 +6,7 @@ import Footer from "@/app/components/footer";
 import SideNavbar from "@/app/components/SideNavbar";
 import Link from 'next/link';
 
-export default function Chapter1() {
+export default function Chapter2() {
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleSidebar = () => {
