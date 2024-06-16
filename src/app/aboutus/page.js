@@ -33,7 +33,7 @@ export default function AboutUs() {
                 />
                 
                 <h3 className="absolute left-[370px] top-0 font-semibold text-title text-white text-5xl"> Eric Liu </h3>
-                <p className="absolute left-[370px] right-[300px] top-[70px] font-semibold text-title text-neutral-300 text-lg"> Description goes here. </p>
+                <p className="absolute left-[370px] right-[300px] top-[70px] font-semibold text-title text-neutral-300 text-lg"> Hi all! My name is Eric and I'm extremely proud to be one of the Co-Founders of AI Explorers. I am an uncoming senior at San Mateo High School. Innovation is something that I am truly inspired by and has led me to organize the first Hackathon at my school and other clubs. Some of my hobbies include water polo, working out, and camping.</p>
             </div>
 
 
