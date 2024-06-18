@@ -1,4 +1,4 @@
-import Nav from "@/app/components/navbarAbout"
+import Nav from "@/app/components/navbar"
 import Footer from "@/app/components/footer"
 import Image from "next/image"
 
@@ -6,7 +6,7 @@ export default function AboutUs() {
     return (
         <main>
             <Nav />
-            <h1 class="font-semibold text-title text-center text-white text-7xl mt-10"> About Us</h1>
+            <h1 class="font-semibold text-title text-center text-white text-7xl mt-24"> About Us</h1>
 
             {/* <p class="font-semibold text-title text-center text-neutral-200 text-2xl mt-12"> Ai Explorer Description</p> */}
 
