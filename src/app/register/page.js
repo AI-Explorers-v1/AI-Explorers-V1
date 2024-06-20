@@ -4,7 +4,7 @@ import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, db, signInWithGoogle, signOutUser } from '../firebase';
 import { doc, setDoc } from 'firebase/firestore';
-import Navbar from '../components/Navbar'; // Adjust the path if necessary
+import Navbar from '../components/navbar'; // Adjust the path if necessary
 
 const Register = () => {
   const [user] = useAuthState(auth);
@@ -24,6 +24,7 @@ const Register = () => {
           profilePicture: userData.photoURL,
         });
         console.log('User data written to Firestore');
+        localStorage.setItem('profilePicture', userData.photoURL); // Store profile picture URL in local storage
       }
     } catch (error) {
       console.error("Error registering user: ", error);

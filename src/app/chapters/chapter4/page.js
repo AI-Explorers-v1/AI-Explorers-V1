@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import Navbar from "@/app/components/Navbar";
+import Navbar from "@/app/components/navbar";
 import Footer from "@/app/components/footer";
 import SideNavbar from "@/app/components/SideNavbar";
 import Link from 'next/link';
@@ -128,10 +128,6 @@ export default function Chapter4() {
                             </li>
                         </ol>
                     </ol>
-                    <p className="font-extrabold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose"> Mission statement: </p>
-                    <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose">
-                        At AI Explorers, our mission is to bridge the educational divide by empowering underprivileged communities with the knowledge and skills in Artificial Intelligence and Machine Learning. We are dedicated to providing accessible, high-quality education that inspires innovation, fosters creativity, and equips individuals with the tools needed to thrive in the evolving technological landscape. By democratizing AI education, we aim to unlock potential, promote inclusivity, and drive positive change through the transformative power of technology.
-                    </p>
                     <Footer />
                 </div>
             </div>

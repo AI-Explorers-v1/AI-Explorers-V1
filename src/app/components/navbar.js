@@ -1,15 +1,30 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { FaUserCircle } from 'react-icons/fa';
+import { useAuthState } from 'react-firebase-hooks/auth';
+import { auth } from '../firebase'; // Correct path to firebase.js
 
 function Navbar() {
+  const [user] = useAuthState(auth);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [profilePicture, setProfilePicture] = useState(null);
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
+
+  useEffect(() => {
+    if (user) {
+      const storedProfilePicture = localStorage.getItem('profilePicture');
+      if (storedProfilePicture) {
+        setProfilePicture(storedProfilePicture);
+      } else {
+        setProfilePicture(user.photoURL); // Fallback to user photo URL from auth
+      }
+    }
+  }, [user]);
 
   return (
     <nav className="bg-gray-900 text-white fixed w-full top-0 z-50">
@@ -48,20 +63,34 @@ function Navbar() {
             onClick={toggleDropdown}
             className="flex items-center focus:outline-none"
           >
-            <FaUserCircle size={30} />
+            {profilePicture ? (
+              <img src={profilePicture} alt="Profile" className="rounded-full w-10 h-10" />
+            ) : (
+              <FaUserCircle size={30} />
+            )}
           </button>
           {dropdownOpen && (
             <div className="absolute right-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg z-10">
-              <Link href="/register" legacyBehavior>
-                <a className="block px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md" onClick={() => setDropdownOpen(false)}>
-                  Register
-                </a>
-              </Link>
-              <Link href="/login" legacyBehavior>
-                <a className="block px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md" onClick={() => setDropdownOpen(false)}>
-                  Login
-                </a>
-              </Link>
+              {user ? (
+                <Link href="/profile" legacyBehavior>
+                  <a className="block px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md" onClick={() => setDropdownOpen(false)}>
+                    Profile
+                  </a>
+                </Link>
+              ) : (
+                <>
+                  <Link href="/register" legacyBehavior>
+                    <a className="block px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md" onClick={() => setDropdownOpen(false)}>
+                      Register
+                    </a>
+                  </Link>
+                  <Link href="/login" legacyBehavior>
+                    <a className="block px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md" onClick={() => setDropdownOpen(false)}>
+                      Login
+                    </a>
+                  </Link>
+                </>
+              )}
             </div>
           )}
         </div>

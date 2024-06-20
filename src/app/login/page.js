@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, signInWithEmailAndPassword, signInWithGoogle, signOutUser } from '../firebase'; // Correct path to firebase.js
-import Navbar from '../components/Navbar'; // Adjust the path if necessary
+import Navbar from '../components/navbar'; // Adjust the path if necessary
 
 const Login = () => {
   const [user] = useAuthState(auth);
