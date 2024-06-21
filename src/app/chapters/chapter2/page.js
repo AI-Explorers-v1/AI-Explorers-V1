@@ -31,7 +31,7 @@ export default function Chapter2() {
                     <p className="font-semibold text-title text-center text-black text-4xl mt-16"> i. Supervised vs. Unsupervised Learning</p>
                     <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose">
                         So how does a machine learn from data? Well, there are two types of machine learning techniques, Supervised and Unsupervised. A good video from IBM Technology is linked 
-                        <Link href="https://www.youtube.com/watch?v=W01tIRP_Rqs." className="text-blue-500 text-decoration-line: underline"> here</Link>.
+                        <Link href="https://www.youtube.com/watch?v=W01tIRP_Rqs" className="text-blue-500 text-decoration-line: underline"> here</Link>.
                     </p>
                     <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose">
                         A short exercise, classifying supervised and unsupervised:
@@ -95,6 +95,13 @@ export default function Chapter2() {
                         ></iframe>
                         <h3 className="absolute top-0 left-1/2 transform -translate-x-1/2 font-semibold text-title text-black text-5xl"> Neural Networks </h3>
                         <p className="absolute top-[70px] left-1/2 transform -translate-x-1/2 font-semibold text-center text-black text-lg max-w-md"> Neural Networks </p>
+                    </div>
+                    <div className="flex justify-center mt-16">
+                        <Link href="/chapters/comprehension1" legacyBehavior>
+                        <a className="inline-block px-6 py-3 text-xl font-semibold text-white bg-blue-600 rounded-md shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            Take the Chapter 2 Test
+                        </a>
+                        </Link>
                     </div>
                     <Footer />
                 </div>

@@ -84,6 +84,13 @@ export default function Chapter1() {
           <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 mx-24 leading-loose">
             One of the key components to computer vision is a convolutional neural networks (CNN). While neural networks are the frame for AI, convolutional neural networks help ML models see by fractionating images into pixels. Each pixel/fraction is labeled then used to carry out convolutions, a mathematical process that combines two functions to produce a third function. With this process, the CNN can start by identifying shapes and edges and eventually piece together what an image contains.
           </p>
+          <div className="flex justify-center mt-16">
+            <Link href="/chapters/comprehension1" legacyBehavior>
+              <a className="inline-block px-6 py-3 text-xl font-semibold text-white bg-blue-600 rounded-md shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                Take the Chapter 1 Test
+              </a>
+            </Link>
+          </div>
           <Footer />
         </div>
       </div>

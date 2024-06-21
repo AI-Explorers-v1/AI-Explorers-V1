@@ -128,6 +128,14 @@ export default function Chapter4() {
                             </li>
                         </ol>
                     </ol>
+
+                    <div className="flex justify-center mt-16">
+                        <Link href="/chapters/comprehension4" legacyBehavior>
+                        <a className="inline-block px-6 py-3 text-xl font-semibold text-white bg-blue-600 rounded-md shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            Take the Chapter 4 Test
+                        </a>
+                        </Link>
+                    </div>
                     <Footer />
                 </div>
             </div>

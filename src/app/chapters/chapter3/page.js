@@ -124,6 +124,14 @@ export default function Chapter3() {
                     <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose"> {`print(f'F1 Score: {f1}')`} </p>
                     <p className="font-extrabold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose"> Fine-Tuning and Improvement </p>
                     <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose"> Use techniques like Grid Search or Random Search for hyperparameter optimization. Perform cross-validation to ensure the model's performance is consistent. </p>
+                    
+                    <div className="flex justify-center mt-16">
+                        <Link href="/chapters/comprehension3" legacyBehavior>
+                        <a className="inline-block px-6 py-3 text-xl font-semibold text-white bg-blue-600 rounded-md shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                            Take the Chapter 3 Test
+                        </a>
+                        </Link>
+                    </div>
                     <Footer />
                 </div>
             </div>
