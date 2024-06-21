@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth, signOutUser } from '../firebase'; // Adjust the path if necessary
-import Navbar from '../components/Navbar'; // Adjust the path if necessary
+import { auth, signOutUser } from '../firebase'; // Ensure the path to firebase.js is correct
+import Navbar from '../components/navbar'; // Adjust the path if necessary
 
 const Profile = () => {
   const [user] = useAuthState(auth);
