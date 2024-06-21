@@ -38,4 +38,4 @@ const signOutUser = async () => {
   }
 };
 
-export { auth, db, signInWithGoogle, signOutUser };
+export { auth, db,signInWithEmailAndPassword, signInWithGoogle, signOutUser };
