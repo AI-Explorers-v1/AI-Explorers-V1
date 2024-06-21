@@ -4,7 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { FaUserCircle } from 'react-icons/fa';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from '../firebase'; // Correct path to firebase.js
+import { auth, signOutUser } from '../firebase'; // Correct path to firebase.js
 
 function Navbar() {
   const [user] = useAuthState(auth);
@@ -72,11 +72,19 @@ function Navbar() {
           {dropdownOpen && (
             <div className="absolute right-0 mt-2 w-48 bg-gray-800 rounded-md shadow-lg z-10">
               {user ? (
-                <Link href="/profile" legacyBehavior>
-                  <a className="block px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md" onClick={() => setDropdownOpen(false)}>
-                    Profile
-                  </a>
-                </Link>
+                <>
+                  <Link href="/profile" legacyBehavior>
+                    <a className="block px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md" onClick={() => setDropdownOpen(false)}>
+                      Profile
+                    </a>
+                  </Link>
+                  <button
+                    onClick={signOutUser}
+                    className="block w-full text-left px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md"
+                  >
+                    Sign Out
+                  </button>
+                </>
               ) : (
                 <>
                   <Link href="/register" legacyBehavior>
