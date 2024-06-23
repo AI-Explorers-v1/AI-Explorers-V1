@@ -3,7 +3,8 @@
 import React, { useState } from 'react';
 import Navbar from "@/app/components/navbar";
 import Footer from "@/app/components/footer";
-
+import SideNavbar from "@/app/components/SideNavbar";
+import { FaBars } from 'react-icons/fa'; 
 const questions = [
   {
     question: "What is classification in AI?",
@@ -62,7 +63,11 @@ export default function Comprehension3() {
   const [selectedOption, setSelectedOption] = useState(null);
   const [answers, setAnswers] = useState([]);
   const [score, setScore] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
 
+  const toggleSidebar = () => {
+      setIsOpen(!isOpen);
+  };
   const handleOptionSelect = (index) => {
     setSelectedOption(index);
   };
@@ -98,7 +103,12 @@ export default function Comprehension3() {
   return (
     <div className="bg-gray-900 min-h-screen flex flex-col justify-between">
       <Navbar />
-      <div className="flex-grow flex flex-col items-center justify-center py-12 sm:px-6 lg:px-8">
+        <div className="flex-grow flex flex-col items-center justify-center py-12 sm:px-6 lg:px-8">
+          <button onClick={toggleSidebar}
+                className="absolute top-6 left-6 p-2 text-white bg-gray-900 rounded-md shadow-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 z-50">
+                  <FaBars size={24} />
+                </button>
+          <SideNavbar isOpen={isOpen} toggleSidebar={toggleSidebar} />
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <h2 className="mt-16 text-center text-3xl leading-9 font-extrabold text-white">
             Chapter 3 Comprehension Test

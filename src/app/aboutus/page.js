@@ -26,7 +26,7 @@ export default function AboutUs() {
 
                     <div className="relative flex flex-col items-center">
                         <Image
-                            src={"/images/placeholder.png"}
+                            src={"/images/Eric_headshot.png"}
                             alt="Eric Liu"
                             width={300}
                             height={300}
