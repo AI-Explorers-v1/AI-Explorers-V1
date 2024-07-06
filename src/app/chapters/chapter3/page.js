@@ -5,136 +5,139 @@ import Navbar from "@/app/components/navbar";
 import Footer from "@/app/components/footer";
 import SideNavbar from "@/app/components/SideNavbar";
 import Link from 'next/link';
-import { FaBars } from 'react-icons/fa'; // Importing an icon for the sidebar button
+import { FaBars } from 'react-icons/fa';
+import { Book, Video, FileText, CheckCircle } from 'lucide-react';
 
-export default function Chapter3() {
-    const [isOpen, setIsOpen] = useState(false);
+const ChapterSection = ({ title, icon, children }) => (
+  <div className="mb-12 p-6 bg-white rounded-lg shadow-md">
+    <h2 className="flex items-center text-3xl font-bold mb-4 text-gray-800">
+      {icon}
+      <span className="ml-2">{title}</span>
+    </h2>
+    {children}
+  </div>
+);
 
-    const toggleSidebar = () => {
-        setIsOpen(!isOpen);
-    };
+const LearningObjective = ({ children }) => (
+  <div className="flex items-start mb-2">
+    <CheckCircle className="text-green-500 mr-2 mt-1 flex-shrink-0" />
+    <p className="text-gray-700">{children}</p>
+  </div>
+);
 
-    return (
-        <main className="chapter3-container bg-gray-100 min-h-screen">
-            <Navbar />
-            <div className="relative pt-16">
-                <button
-                    onClick={toggleSidebar}
-                    className="absolute top-6 left-6 p-2 text-white bg-gray-900 rounded-md shadow-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 z-50"
-                >
-                    <FaBars size={24} />
-                </button>
-                <SideNavbar isOpen={isOpen} toggleSidebar={toggleSidebar} />
-                <div className={`transition-transform transform ${isOpen ? 'translate-x-64' : ''}`}>
-                    <h1 className="font-semibold text-title text-center text-black text-7xl mt-20"> Chapter 3</h1>
-                    <p className="font-semibold text-title text-center text-black text-4xl mt-8"> Classification </p>
-                    <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose">
-                        One of the most common uses of Artificial Intelligence is to classify certain things. What is classification? Classification is putting a person, place, or thing into a category or group based on some of their qualities or characteristics. For example, if we were given these 2 images (pic of apple and dog), and were asked which one is an animal, we would classify the image of the dog as one. We know this because animals generally tend to have bones and limbs while an apple does not. Machine Learning models use the same logic to classify data. They generally are trained to be able to recognize some key features of what a certain group of objects would look like. Lets look at some common examples of classification models.
-                    </p>
-                    <p className="font-semibold text-title text-center text-black text-5xl mt-16"> a. Examples </p>
-                    <p className="font-semibold text-title text-center text-black text-4xl mt-16"> i. Apples vs. Oranges </p>
-                    <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose">
-                        Every ML programmer makes an apple vs. orange classifier at some point in their life. If you may remember from lesson 2, supervised learning is when data is labeled. An apple vs orange classifier commonly has labeled data. That way, the machine learning model can begin to learn some key features of an apple vs. those of an orange.
-                    </p>
-                    <p className="font-semibold text-title text-center text-black text-4xl mt-16"> ii. Cat vs. Dog </p>
-                    <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose">
-                        Another common example is a cat vs. dog classifier. Most of these classifiers use the same logic as the apple vs. orange classifier. By learning the key features of a dog and the key features of a cat, it is able to differentiate which animal is a cat and which is a dog.
-                    </p>
-                    <p className="font-semibold text-title text-center text-black text-4xl mt-16"> iii. Spam vs. Not Spam </p>
-                    <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose">
-                        Our final example is spam vs. not spam. Oftentimes, it is hard to notice some of the distinctive factors of a spam email, however it is still there. ML models trained on enough spam vs. not spam email data are able to decipher which emails are which.
-                    </p>
-                    <p className="font-semibold text-title text-center text-black text-5xl mt-16"> b. Types of classification Algorithms </p>
-                    <p className="font-semibold text-title text-center text-black text-4xl mt-16"> i. Decision Tree </p>
-                    <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose">
-                        The basic idea behind the Decision Tree is that it contains nodes that represent the features of a dataset, branches that represent the decision rules, and leaf nodes that represent the outcome. A decision tree simply asks a question, and based on the answer (Yes/No), it further splits the tree into subtrees.
-                    </p>
-                    <p className="font-semibold text-title text-center text-black text-4xl mt-16"> ii. K-Nearest Neighbors </p>
-                    <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose">
-                        The K-Nearest Neighbor algorithm works by:
-                    </p>
-                    <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose">
-                        Storing the entire dataset
-                    </p>
-                    <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose">
-                        Classifying each new data point based on the existing data points that are similar to it
-                    </p>
-                    <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose">
-                        Making predictions based on the training or "known" data only
-                    </p>
-                    <Link href="https://towardsdatascience.com/machine-learning-basics-with-the-k-nearest-neighbors-algorithm-6a6e71d01761" className="text-blue-500 text-decoration-line: underline">
-                        ⇒ A resourceful guide to Machine Learning Basics with the K-Nearest Neighbors Algorithm
-                    </Link>
-                    <p className="font-semibold text-title text-center text-black text-4xl mt-16"> iii. Support Vector Machines </p>
-                    <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose">
-                        The main objective of the SVM algorithm is to find the optimal hyperplane in an N-dimensional space that can separate the data points in different classes in the feature space. How does it work?
-                    </p>
-                    <p className="font-semibold text-title text-center text-black text-4xl mt-16"> iv. Artificial Neural Networks </p>
-                    <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose">
-                        Artificial Neural Networks are the backbone for many machine learning processes and will be the focus of this course from here on out. The following video is extremely helpful to understand the basics of neural networks.
-                    </p>
-                    <Link href="https://www.youtube.com/watch?v=aircAruvnKk" className="text-blue-500 text-decoration-line: underline">
-                        https://www.youtube.com/watch?v=aircAruvnKk
-                    </Link>
-                    <p className="font-semibold text-title text-center text-black text-5xl mt-16"> c. Example w/ Coding </p>
-                    <p className="font-semibold text-title text-center text-black text-4xl mt-16">
-                        <Link href="https://colab.research.google.com/drive/16pBJQePbqkz3QFV54L4NIkOn1kwpuRrj" className="text-blue-500 text-decoration-line: underline">
-                            i. Intro to Google Colab (environment for training ml models)
-                        </Link>
-                    </p>
-                    <p className="font-semibold text-title text-center text-black text-4xl mt-16">
-                        <Link href="https://www.kaggle.com/learn/intro-to-machine-learning" className="text-blue-500 text-decoration-line: underline">
-                            ii. Intro to Machine learning with Kaggle
-                        </Link>
-                    </p>
-                    <p className="font-semibold text-title text-center text-black text-4xl mt-16">
-                        <Link href="https://www.kaggle.com/code/kanishanand/dogs-vs-cats" className="text-blue-500 text-decoration-line: underline">
-                            iii. Cat vs. Dog classifier (Kaggle)
-                        </Link>
-                    </p>
-                    <p className="font-semibold text-title text-center text-black text-4xl mt-16"> iv. Custom Project! </p>
-                    <p className="font-semibold text-title text-center text-black text-4xl mt-16"> Custom Project Walkthrough </p>
-                    <p className="font-extrabold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose"> Search for a Dataset on Kaggle: </p>
-                    <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose">
-                        Use the search bar to find datasets suitable for classification problems (e.g., "Iris Dataset", "Titanic Dataset", etc.). Select a dataset that interests you and make sure it’s appropriate for a classification task.
-                    </p>
-                    <p className="font-extrabold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose"> Download the Dataset: </p>
-                    <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose">
-                        Go to the dataset's page and click on the "Download" button to get the dataset files (usually in CSV format).
-                    </p>
-                    <p className="font-extrabold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose"> Setup the environment in Google Colab: </p>
-                    <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose">
-                        Make sure to install the necessary libraries (pandas, numpy, matplotlib, sklearn etc.)
-                    </p>
-                    <p className="font-extrabold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose"> Load and Explore the Dataset:</p>
-                    <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose"> Display the first few rows of the dataset: df.head() </p>
-                    <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose"> Get basic information about the dataset:df.info() </p>
-                    <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose"> Check for missing values: df.isnull().sum() </p>
-                    <p className="font-extrabold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose"> Split the dataset: </p>
-                    <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose"> X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)  </p>
-                    <p className="font-extrabold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose"> Evaluate the model: </p>
-                    <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose"> (a few metrics from sklearn) </p>
-                    <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose"> accuracy = accuracy_score(y_test, y_pred) </p>
-                    <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose"> precision = precision_score(y_test, y_pred, average='weighted') </p>
-                    <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose"> recall = recall_score(y_test, y_pred, average='weighted') </p>
-                    <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose"> f1 = f1_score(y_test, y_pred, average='weighted') </p>
-                    <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose"> {`print(f'Accuracy: {accuracy}')`} </p>
-                    <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose"> {`print(f'Precision: {precision}')`} </p>
-                    <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose"> {`print(f'Recall: {recall}')`} </p>
-                    <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose"> {`print(f'F1 Score: {f1}')`} </p>
-                    <p className="font-extrabold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose"> Fine-Tuning and Improvement </p>
-                    <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose"> Use techniques like Grid Search or Random Search for hyperparameter optimization. Perform cross-validation to ensure the model's performance is consistent. </p>
-                    
-                    <div className="flex justify-center mt-16">
-                        <Link href="/chapters/comprehension3" legacyBehavior>
-                        <a className="inline-block px-6 py-3 text-xl font-semibold text-white bg-blue-600 rounded-md shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                            Take the Chapter 3 Test
-                        </a>
-                        </Link>
-                    </div>
-                    <Footer />
+const Chapter3 = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const sections = [
+    {
+      title: "Introduction to Classification",
+      content: (
+        <>
+          <p>Classification is a fundamental concept in AI where objects are categorized based on their characteristics. It's widely used in various applications:</p>
+          <ul className="list-disc ml-6 space-y-2">
+            <li>Apples vs. Oranges: A classic example of binary classification</li>
+            <li>Cat vs. Dog: Another common binary classification task</li>
+            <li>Spam vs. Not Spam: Used in email filtering systems</li>
+          </ul>
+        </>
+      )
+    },
+    {
+      title: "Types of Classification Algorithms",
+      content: (
+        <>
+          <p>There are several types of classification algorithms, each with its own approach:</p>
+          <ul className="list-disc ml-6 space-y-2">
+            <li>Decision Trees: Uses a tree-like model of decisions</li>
+            <li>K-Nearest Neighbors: Classifies based on the closest training examples</li>
+            <li>Support Vector Machines: Finds the optimal hyperplane to separate classes</li>
+            <li>Artificial Neural Networks: Inspired by biological neural networks</li>
+          </ul>
+        </>
+      ),
+      video: "https://www.youtube.com/embed/aircAruvnKk"
+    },
+    {
+      title: "Practical Classification with Machine Learning",
+      content: (
+        <>
+          <p>To get started with practical classification tasks:</p>
+          <ol className="list-decimal ml-6 space-y-2">
+            <li>Use Google Colab as an environment for training ML models</li>
+            <li>Learn the basics of machine learning with Kaggle tutorials</li>
+            <li>Try implementing a Cat vs. Dog classifier using Kaggle datasets</li>
+            <li>Create a custom project following the provided walkthrough</li>
+          </ol>
+        </>
+      ),
+      exercise: "Choose a dataset from Kaggle suitable for a classification task. Implement a simple classifier using the steps outlined in the custom project walkthrough. Compare the performance of at least two different classification algorithms on your chosen dataset."
+    }
+  ];
+
+  return (
+    <main className="chapter3-container min-h-screen" style={{ backgroundColor: '#E9F0FD' }}>
+      <Navbar />
+      <div className="relative pt-16">
+        <div className="flex">
+          <SideNavbar/>
+            <div className="max-w-4xl mx-auto px-4 py-8">
+              <h1 className="text-5xl font-bold text-center mb-8 text-black">Chapter 3: Classification in AI</h1>
+              
+              <ChapterSection title="Learning Objectives" icon={<Book className="text-blue-500" />}>
+                <div className="ml-6">
+                  {sections.map((section, index) => (
+                    <LearningObjective key={index}>
+                      Understand {section.title.toLowerCase()}
+                    </LearningObjective>
+                  ))}
                 </div>
+              </ChapterSection>
+              
+              {sections.map((section, index) => (
+                <ChapterSection key={index} title={section.title} icon={<FileText className="text-blue-500" />}>
+                  <div className="prose max-w-none">
+                  <p className="text-gray-700">{section.content}</p>
+                  </div>
+                  {section.video && (
+                    <div className="mt-6 p-4 ">
+                      <h3 className="text-xl text-gray-700 font-semibold mb-2">Watch and Learn</h3>
+                      <div className="aspect-w-16 aspect-h-9"style={{ height: '400px' }}>
+                        <iframe 
+                          src={section.video}
+                          frameBorder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          className="w-full h-full"
+                        ></iframe>
+                      </div>
+                    </div>
+                  )}
+                  {section.exercise && (
+                    <div className="mt-6 p-4 bg-gray-100 rounded-md">
+                      <h3 className="text-xl text-blue-500 font-semibold mb-2">Practice Exercise</h3>
+                      <p className="text-gray-700">{section.exercise}</p>
+                    </div>
+                  )}
+                </ChapterSection>
+              ))}
+              
+              <div className="mt-12 text-center">
+                <Link href="/chapters/comprehension3" legacyBehavior>
+                  <a className="inline-block px-6 py-3 text-xl font-semibold text-white bg-blue-600 rounded-md shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    Take the Chapter 3 Test
+                  </a>
+                </Link>
+              </div>
             </div>
-        </main>
-    );
-}
+          </div>
+        </div>
+      <Footer />
+    </main>
+  );
+};
+
+export default Chapter3;

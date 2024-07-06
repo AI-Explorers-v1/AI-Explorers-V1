@@ -6,139 +6,206 @@ import Footer from "@/app/components/footer";
 import SideNavbar from "@/app/components/SideNavbar";
 import Link from 'next/link';
 import { FaBars } from 'react-icons/fa';
+import { Book, Video, FileText, CheckCircle, Code } from 'lucide-react';
 
-export default function Chapter4() {
-    const [isOpen, setIsOpen] = useState(false);
+const ChapterSection = ({ title, icon, children }) => (
+  <div className="mb-12 p-6 bg-white rounded-lg shadow-md">
+    <h2 className="flex items-center text-3xl font-bold mb-4 text-gray-800">
+      {icon}
+      <span className="ml-2">{title}</span>
+    </h2>
+    {children}
+  </div>
+);
 
-    const toggleSidebar = () => {
-        setIsOpen(!isOpen);
-    };
+const LearningObjective = ({ children }) => (
+  <div className="flex items-start mb-2">
+    <CheckCircle className="text-green-500 mr-2 mt-1 flex-shrink-0" />
+    <p className="text-gray-700">{children}</p>
+  </div>
+);
 
-    return (
-        <main className="chapter4-container bg-gray-100 min-h-screen">
-            <Navbar />
-            <div className="relative pt-16">
-                <button
-                    onClick={toggleSidebar}
-                    className="absolute top-6 left-6 p-2 text-white bg-gray-900 rounded-md shadow-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 z-50"
-                >
-                    <FaBars size={24} />
-                </button>
-                <SideNavbar isOpen={isOpen} toggleSidebar={toggleSidebar} />
-                <div className={`transition-transform transform ${isOpen ? 'translate-x-64' : ''}`}>
-                    <h1 className="font-semibold text-title text-center text-black text-7xl mt-20"> Chapter 4</h1>
-                    <p className="font-semibold text-title text-center text-black text-4xl mt-8"> Transformer Model (architecture) </p>
-                    <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose">
-                        One of the most powerful advancements in AI is the Transformer model. Let's explore its architecture and some prominent examples.
-                    </p>
-                    <p className="font-semibold text-title text-center text-black text-5xl mt-16"> a. Examples </p>
-                    <p className="font-semibold text-title text-center text-black text-4xl mt-16"> i. Chat GPT </p>
-                    <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose">
-                        Chat GPT is a language model used for NLP (natural language processing). It can contextualize text and provide responses based on the data it was trained on. 
-                        <Link href="https://example.com/chatgpt" className="text-blue-500 text-decoration-line: underline">Link for more information on ChatGPT.</Link>
-                    </p>
-                    <p className="font-semibold text-title text-center text-black text-4xl mt-16"> ii. BERT </p>
-                    <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose">
-                        BERT is another framework for NLP, unique because it is bidirectional (reads both directions at once). 
-                        <Link href="https://example.com/bert" className="text-blue-500 text-decoration-line: underline">Link for more information on BERT.</Link>
-                    </p>
-                    <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose">
-                        You might have used these machine-learning models before for various tasks. In this chapter, we will take a deeper dive into what makes them so powerful and unique.
-                    </p>
-                    <p className="font-semibold text-title text-center text-black text-5xl mt-16"> b. Attention (self-attention) </p>
-                    <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose">
-                        Self-attention is the key mechanism behind Transformer Models, allowing tools like Chat GPT and BERT to be incredibly capable in processing language. But what exactly does it do?
-                    </p>
-                    <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose">
-                        Here is a short visualization: Imagine you're reading a sentence. To understand each word, you consider the other words around it, right? Self-attention is similar. In a transformer model, self-attention allows the model to focus on important parts of an input sequence (like a sentence) to understand the bigger picture. Instead of just processing things sequentially, it considers the relationships between all parts of the sequence at once.
-                    </p>
-                    <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose"> Here is a breakdown of the self-attention layer:</p>
-                    <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose">
-                        Query, Key, and Value Vectors: Each element in the input sequence (like a word in a sentence) is assigned three vectors:
-                    </p>
-                    <ul className="list-disc ml-32 mt-4 mb-4 text-left">
-                        <li><strong>Query (Q)</strong>: Represents what information the model is currently looking for.</li>
-                        <li><strong>Key (K)</strong>: Captures the essence of each element, allowing the model to assess its relevance to the query.</li>
-                        <li><strong>Value (V)</strong>: Holds the actual information associated with each element.</li>
-                    </ul>
-                    <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose">
-                        Attention Scores: The model calculates a score for each pair of elements in the sequence. This score reflects how relevant the value (information) of one element is to the current query. It's calculated by taking the dot product of the query vector and the key vector of each element, often with a scaling factor.
-                    </p>
-                    <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose">
-                        Softmax Function: The attention scores are then passed through a softmax function. This function transforms the scores into a probability distribution, ensuring they all sum up to 1. Basically, it tells the model how much "attention" to pay to each element based on its relevance.
-                    </p>
-                    <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose">
-                        Weighted Sum: Finally, the model takes a weighted sum of the value vectors, using the attention scores as weights. This gives more weight to the values of elements with higher attention scores, effectively creating a new representation of the sequence that focuses on the most relevant parts for the current processing step.
-                    </p>
-                    <p className="font-semibold text-title text-center text-black text-5xl mt-16"> c. Utilizing the OpenAI API (Chat GPT) for your own personal project!</p>
-                    <p className="font-semibold text-title text-center text-black text-xl mt-16 mb-20 ml-24 mr-24 leading-loose">
-                        Follow these steps to set up and use the OpenAI API:
-                    </p>
-                    <ol className="list-decimal ml-32 mt-4 mb-4 text-left">
-                        <li><strong>Set Up Your Environment</strong></li>
-                        <ol className="list-disc ml-8">
-                            <li>Sign Up for OpenAI API:
-                                <ol className="list-decimal ml-8">
-                                    <li>Go to the OpenAI website.</li>
-                                    <li>Sign up for an account if you don’t already have one.</li>
-                                    <li>Navigate to the API section and get your API key.</li>
-                                </ol>
-                            </li>
-                            <li>Install Required Software:
-                                <ol className="list-decimal ml-8">
-                                    <li>Ensure you have Python installed on your computer. You can download it from the official Python website.</li>
-                                    <li>Install the openai Python package using pip:
-                                        <pre className="bg-gray-200 p-4 mt-2 rounded-md text-left text-black">pip install openai</pre>
-                                    </li>
-                                </ol>
-                            </li>
-                        </ol>
-                        <li><strong>Configure Your API Key</strong></li>
-                        <ol className="list-disc ml-8">
-                            <li>Store Your API Key Securely:
-                                <ol className="list-decimal ml-8">
-                                    <li>Create a .env file in your project directory and add your API key:
-                                        <pre className="bg-gray-200 p-4 mt-2 rounded-md text-left text-black">OPENAI_API_KEY=your-api-key-here</pre>
-                                    </li>
-                                    <li>Install the python-dotenv package to load environment variables:
-                                        <pre className="bg-gray-200 p-4 mt-2 rounded-md text-left text-black">pip install python-dotenv</pre>
-                                    </li>
-                                </ol>
-                            </li>
-                        </ol>
-                        <li><strong>Write Your Python Script</strong></li>
-                        <ol className="list-disc ml-8">
-                            <li>Import Necessary Libraries:
-                                <pre className="bg-gray-200 p-4 mt-2 rounded-md text-left text-black">
-                                    {`import openai\nimport os\nfrom dotenv import load_dotenv`}
-                                </pre>
-                            </li>
-                            <li>Load Your API Key:
-                                <pre className="bg-gray-200 p-4 mt-2 rounded-md text-left text-black">
-                                    {`load_dotenv()\nopenai.api_key = os.getenv('OPENAI_API_KEY')`}
-                                </pre>
-                            </li>
-                        </ol>
-                        <li><strong>Make an API Request</strong></li>
-                        <ol className="list-disc ml-8">
-                            <li>Create a Function to Call the API:
-                                <pre className="bg-gray-200 p-4 mt-2 rounded-md text-left text-black">
-                                    {`def get_response(prompt, model="gpt-3.5-turbo"):\n    response = openai.ChatCompletion.create(\n        model=model,\n        messages=[\n            {"role": "system", "content": "You are a helpful assistant."},\n            {"role": "user", "content": prompt},\n        ],\n    )\n    return response['choices'][0]['message']['content']`}
-                                </pre>
-                            </li>
-                        </ol>
-                    </ol>
+const InteractiveDemo = ({ title, children }) => (
+  <div className="mt-6 p-4 bg-blue-50 rounded-md border border-blue-200">
+    <h3 className="text-xl text-blue-700 font-semibold mb-2">{title}</h3>
+    {children}
+  </div>
+);
 
-                    <div className="flex justify-center mt-16">
-                        <Link href="/chapters/comprehension4" legacyBehavior>
-                        <a className="inline-block px-6 py-3 text-xl font-semibold text-white bg-blue-600 rounded-md shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                            Take the Chapter 4 Test
-                        </a>
-                        </Link>
-                    </div>
-                    <Footer />
+const Chapter4 = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [attentionInput, setAttentionInput] = useState("The cat sat on the mat");
+  const [attentionOutput, setAttentionOutput] = useState("");
+
+  const toggleSidebar = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const simulateAttention = () => {
+    const words = attentionInput.split(" ");
+    const attention = words.map((word, index) => {
+      const score = Math.random();
+      return { word, score };
+    });
+    attention.sort((a, b) => b.score - a.score);
+    setAttentionOutput(attention.map(({ word, score }) => `${word} (${score.toFixed(2)})`).join(", "));
+  };
+
+  const sections = [
+    {
+      title: "Introduction to Transformer Models",
+      content: (
+        <>
+          <p>Transformer models represent a significant advancement in AI, particularly in natural language processing (NLP). They use a unique architecture that allows them to process sequential data more effectively than previous models.</p>
+          <p className="mt-4">Key features of transformer models include:</p>
+          <ul className="list-disc ml-6 space-y-2">
+            <li>Parallel processing of input data</li>
+            <li>Attention mechanisms for capturing context</li>
+            <li>Ability to handle long-range dependencies in data</li>
+          </ul>
+        </>
+      )
+    },
+    {
+      title: "Examples of Transformer Models",
+      content: (
+        <>
+          <h3 className="text-2xl font-semibold mb-2">1. GPT (Generative Pre-trained Transformer)</h3>
+          <p>GPT models, including ChatGPT, are designed for generating human-like text. They're trained on vast amounts of text data and can perform various language tasks.</p>
+          <h3 className="text-2xl font-semibold mt-4 mb-2">2. BERT (Bidirectional Encoder Representations from Transformers)</h3>
+          <p>BERT is designed to understand the context of a word by looking at the words that come before and after it. This bidirectional approach allows for more nuanced language understanding.</p>
+          <h3 className="text-2xl font-semibold mt-4 mb-2">3. T5 (Text-to-Text Transfer Transformer)</h3>
+          <p>T5 treats every NLP task as a "text-to-text" problem, allowing it to be used for a wide range of tasks with a single model architecture.</p>
+        </>
+      ),
+      video: "https://www.youtube.com/embed/4Bdc55j80l8"
+    },
+    {
+      title: "Self-Attention Mechanism",
+      content: (
+        <>
+          <p>Self-attention is the core innovation in transformer models. It allows the model to weigh the importance of different parts of the input when processing each part.</p>
+          <h3 className="text-2xl font-semibold mt-4 mb-2">How Self-Attention Works:</h3>
+          <ol className="list-decimal ml-6 space-y-2">
+            <li><strong>Query, Key, and Value Vectors:</strong> Each input element is transformed into these three vectors.</li>
+            <li><strong>Attention Scores:</strong> Calculated by comparing the query of one element with the keys of all elements.</li>
+            <li><strong>Softmax:</strong> Scores are normalized to sum to 1, creating attention weights.</li>
+            <li><strong>Weighted Sum:</strong> The final output for each element is a weighted sum of all value vectors, using the attention weights.</li>
+          </ol>
+        </>
+      )
+    },
+    {
+      title: "Using the OpenAI API",
+      content: (
+        <>
+          <p>The OpenAI API allows developers to integrate powerful language models like GPT into their applications. Here's a step-by-step guide to get started:</p>
+          <ol className="list-decimal ml-6 space-y-2">
+            <li>Sign up for an OpenAI account and obtain an API key</li>
+            <li>Install the OpenAI Python library: <code>pip install openai</code></li>
+            <li>Set up your environment variables to securely store your API key</li>
+            <li>Write Python code to make API calls and process the responses</li>
+          </ol>
+          <p className="mt-4">Here's a basic example of using the OpenAI API:</p>
+          <pre className="bg-gray-100 p-4 rounded-md overflow-x-auto">
+{`import openai
+import os
+
+openai.api_key = os.getenv("OPENAI_API_KEY")
+
+response = openai.ChatCompletion.create(
+  model="gpt-3.5-turbo",
+  messages=[
+    {"role": "system", "content": "You are a helpful assistant."},
+    {"role": "user", "content": "What is a transformer model?"}
+  ]
+)
+
+print(response.choices[0].message.content)`}
+          </pre>
+        </>
+      )
+    }
+  ];
+
+  return (
+    <main className="chapter4-container min-h-screen" style={{ backgroundColor: '#E9F0FD' }}>
+      <Navbar />
+      <div className="relative pt-16">
+        <div className="flex">
+          <SideNavbar />
+          
+            <div className="max-w-4xl mx-auto px-4 py-8">
+              <h1 className="text-5xl font-bold text-center mb-8 text-black">Chapter 4: Transformer Models</h1>
+              
+              <ChapterSection title="Learning Objectives" icon={<Book className="text-blue-500" />}>
+                <div className="ml-6">
+                  {sections.map((section, index) => (
+                    <LearningObjective key={index}>
+                      Understand {section.title.toLowerCase()}
+                    </LearningObjective>
+                  ))}
                 </div>
+              </ChapterSection>
+              
+              {sections.map((section, index) => (
+                <ChapterSection key={index} title={section.title} icon={<FileText className="text-blue-500" />}>
+                  <div className="prose max-w-none">
+                  <p className="text-gray-700">{section.content}</p>
+                  </div>
+                  {section.video && (
+                    <div className="mt-6">
+                      <h3 className="text-xl text-gray-700 font-semibold mb-2">Watch and Learn</h3>
+                      <div className="aspect-w-16 aspect-h-9" style={{ height: '400px' }}>
+                        <iframe 
+                          src={section.video}
+                          frameBorder="0"
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                          allowFullScreen
+                          className="w-full h-full"
+                        ></iframe>
+                      </div>
+                    </div>
+                  )}
+                  {section.title === "Self-Attention Mechanism" && (
+                    <InteractiveDemo title="Simulate Self-Attention">
+                      <p>Enter a sentence to see a simplified simulation of self-attention weights:</p>
+                      <input 
+                        type="text" 
+                        value={attentionInput}
+                        onChange={(e) => setAttentionInput(e.target.value)}
+                        className="w-full p-2 border rounded mt-2"
+                      />
+                      <button 
+                        onClick={simulateAttention}
+                        className="mt-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                      >
+                        Simulate Attention
+                      </button>
+                      {attentionOutput && (
+                        <div className="mt-4">
+                          <strong>Attention Output:</strong>
+                          <p>{attentionOutput}</p>
+                        </div>
+                      )}
+                    </InteractiveDemo>
+                  )}
+                </ChapterSection>
+              ))}
+              
+              <div className="mt-12 text-center">
+                <Link href="/chapters/comprehension4" legacyBehavior>
+                  <a className="inline-block px-6 py-3 text-xl font-semibold text-white bg-blue-600 rounded-md shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                    Take the Chapter 4 Test
+                  </a>
+                </Link>
+              </div>
             </div>
-        </main>
-    );
-}
+          </div>
+        </div>
+      <Footer />
+    </main>
+  );
+};
+
+export default Chapter4;
