@@ -1,10 +1,10 @@
-import Nav from "@/app/components/navbar"
+import FullWidthNavbar from '@/app/components/FullWidthNavbar';
 import Footer from "@/app/components/footer"
 
 export default function Donate() {
     return (
         <main>
-            <Nav />
+            <FullWidthNavbar />
             <h1 class="font-semibold text-title text-center text-white text-7xl mt-24">Donate</h1>
 
             <div className="iframeContainer">

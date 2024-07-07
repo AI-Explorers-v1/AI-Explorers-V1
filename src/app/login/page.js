@@ -3,14 +3,14 @@
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, signInWithGoogle, signOutUser } from '../firebase'; // Correct path to firebase.js
-import Navbar from '../components/navbar'; // Adjust the path if necessary
+import FullWidthNavbar from '@/app/components/FullWidthNavbar';
 
 const Login = () => {
   const [user] = useAuthState(auth);
 
   return (
     <div className="bg-gray-900 min-h-screen">
-      <Navbar />
+      <FullWidthNavbar />
       <div className="flex flex-col items-center justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <h2 className="mt-12 text-center text-3xl font-extrabold text-white">Login</h2>

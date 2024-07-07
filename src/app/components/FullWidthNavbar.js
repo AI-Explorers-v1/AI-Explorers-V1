@@ -1,18 +1,16 @@
 "use client";
 
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { FaUserCircle } from 'react-icons/fa';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, signOutUser } from '../firebase'; // Ensure this path is correct
-import { SidebarContext } from '../../../context/SidebarContext'; // You'll need to create this context
 
-function Navbar() {
+function FullWidthNavbar() {
   const [user] = useAuthState(auth);
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [profilePicture, setProfilePicture] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { isCollapsed } = useContext(SidebarContext);
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
@@ -34,8 +32,8 @@ function Navbar() {
   }, [user]);
 
   return (
-    <nav className={`bg-gray-900 text-white sticky top-0 z-50 transition-all duration-300 ease-in-out ${isCollapsed ? 'ml-20' : 'ml-64'}`}>
-      <div className="flex flex-wrap items-center justify-between p-4">
+    <nav className="bg-gray-900 text-white sticky top-0 w-full z-50">
+      <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <a href="/" className="flex items-center">
           <img src={"/images/AiExplorersLogoNoBG.png"} className="h-12 mr-3" alt="AIExplorer Logo" />
           <span className="self-center text-2xl font-semibold whitespace-nowrap">AI Explorers</span>
@@ -117,4 +115,4 @@ function Navbar() {
   );
 }
 
-export default Navbar;
+export default FullWidthNavbar;

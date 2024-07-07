@@ -3,7 +3,7 @@
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth, signOutUser } from '../firebase'; // Ensure the path to firebase.js is correct
-import Navbar from '../components/navbar'; // Adjust the path if necessary
+import FullWidthNavbar from '@/app/components/FullWidthNavbar';
 
 const Profile = () => {
   const [user] = useAuthState(auth);
@@ -11,7 +11,7 @@ const Profile = () => {
   if (!user) {
     return (
       <div className="bg-gray-900 min-h-screen flex items-center justify-center text-white">
-        <Navbar />
+        <FullWidthNavbar />
         <div>
           <h1 className="text-3xl">Please sign in to view your profile.</h1>
         </div>
@@ -21,7 +21,7 @@ const Profile = () => {
 
   return (
     <div className="bg-gray-900 min-h-screen">
-      <Navbar />
+      <FullWidthNavbar />
       <div className="flex flex-col items-center justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <h2 className="mt-12 text-center text-3xl font-extrabold text-white">Your Profile</h2>
