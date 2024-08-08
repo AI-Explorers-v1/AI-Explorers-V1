@@ -5,61 +5,60 @@ import Navbar from "@/app/components/navbar";
 import Footer from "@/app/components/footer";
 import SideNavbar from "@/app/components/SideNavbar";
 import { FaBars } from 'react-icons/fa'; 
-
 const questions = [
   {
-    question: "What is deep learning?",
+    question: "What is the primary function of the Transformer model?",
     options: [
-      "A type of supervised learning",
-      "A subset of machine learning using neural networks with multiple layers",
-      "A method for data preprocessing",
-      "A technique for feature selection"
+      "Generating new images from text",
+      "Translating languages in real-time",
+      "Grouping objects based on their features",
+      "Classifying objects in images"
     ],
     correctAnswer: 1
   },
   {
-    question: "Which of the following is NOT a key characteristic of deep learning?",
+    question: "What is Chat GPT primarily used for?",
     options: [
-      "Inspired by the human brain's structure",
-      "Requires extensive manual feature engineering",
-      "Capable of learning complex patterns from large amounts of data",
-      "Powers many modern AI applications"
-    ],
-    correctAnswer: 1
-  },
-  {
-    question: "What are the main components of a deep neural network?",
-    options: [
-      "Input layer, hidden layers, and output layer",
-      "Nodes, edges, and weights",
-      "Algorithms, data, and predictions",
-      "Features, labels, and classes"
-    ],
-    correctAnswer: 0
-  },
-  {
-    question: "Which type of deep learning network is best suited for image processing tasks?",
-    options: [
-      "Recurrent Neural Networks (RNNs)",
-      "Long Short-Term Memory (LSTM) Networks",
-      "Convolutional Neural Networks (CNNs)",
-      "Generative Adversarial Networks (GANs)"
+      "Cooking recipes",
+      "Self-driving cars",
+      "Natural Language Processing",
+      "Weather forecasting"
     ],
     correctAnswer: 2
   },
   {
-    question: "What is the purpose of backpropagation in training deep learning models?",
+    question: "What does 'self-attention' in Transformer models refer to?",
     options: [
-      "To generate new training data",
-      "To calculate predictions",
-      "To measure the model's accuracy",
-      "To calculate gradients and adjust the network's weights"
+      "Paying attention to the model's training data",
+      "Allowing the model to focus on important parts of an input sequence",
+      "Ignoring irrelevant parts of the data",
+      "Processing images in real-time"
     ],
-    correctAnswer: 3
+    correctAnswer: 1
+  },
+  {
+    question: "What are the three vectors used in the self-attention mechanism?",
+    options: [
+      "Query, Key, and Value",
+      "Input, Output, and Feedback",
+      "Source, Target, and Context",
+      "Data, Model, and Result"
+    ],
+    correctAnswer: 0
+  },
+  {
+    question: "What is the main purpose of the softmax function in self-attention?",
+    options: [
+      "To transform attention scores into a probability distribution",
+      "To generate new data from existing data",
+      "To classify images into categories",
+      "To clean and preprocess data"
+    ],
+    correctAnswer: 0
   }
 ];
 
-export default function Comprehension5() {
+export default function Comprehension4() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
   const [answers, setAnswers] = useState([]);
@@ -105,10 +104,10 @@ export default function Comprehension5() {
     <div className="bg-gray-900 min-h-screen flex flex-col justify-between">
       <Navbar />
       <div className="flex-grow flex flex-col items-center justify-center py-12 sm:px-6 lg:px-8">
-        <SideNavbar isOpen={isOpen} toggleSidebar={toggleSidebar} />
+          <SideNavbar isOpen={isOpen} toggleSidebar={toggleSidebar} />
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <h2 className="mt-16 text-center text-3xl leading-9 font-extrabold text-white">
-            Chapter 3 Comprehension Test: Deep Learning
+            Chapter 5 Comprehension Test
           </h2>
           <div className="relative pt-1">
             <div className="overflow-hidden h-2 mb-4 text-xs flex rounded bg-blue-200">

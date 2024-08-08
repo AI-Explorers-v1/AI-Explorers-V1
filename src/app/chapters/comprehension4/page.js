@@ -7,58 +7,58 @@ import SideNavbar from "@/app/components/SideNavbar";
 import { FaBars } from 'react-icons/fa'; 
 const questions = [
   {
-    question: "What is the primary function of the Transformer model?",
+    question: "What is classification in AI?",
     options: [
-      "Generating new images from text",
-      "Translating languages in real-time",
       "Grouping objects based on their features",
-      "Classifying objects in images"
-    ],
-    correctAnswer: 1
-  },
-  {
-    question: "What is Chat GPT primarily used for?",
-    options: [
-      "Cooking recipes",
-      "Self-driving cars",
-      "Natural Language Processing",
-      "Weather forecasting"
-    ],
-    correctAnswer: 2
-  },
-  {
-    question: "What does 'self-attention' in Transformer models refer to?",
-    options: [
-      "Paying attention to the model's training data",
-      "Allowing the model to focus on important parts of an input sequence",
-      "Ignoring irrelevant parts of the data",
-      "Processing images in real-time"
-    ],
-    correctAnswer: 1
-  },
-  {
-    question: "What are the three vectors used in the self-attention mechanism?",
-    options: [
-      "Query, Key, and Value",
-      "Input, Output, and Feedback",
-      "Source, Target, and Context",
-      "Data, Model, and Result"
+      "Teaching a machine to play chess",
+      "Generating new images from text",
+      "Translating languages in real-time"
     ],
     correctAnswer: 0
   },
   {
-    question: "What is the main purpose of the softmax function in self-attention?",
+    question: "Which model is commonly used for apple vs. orange classification?",
     options: [
-      "To transform attention scores into a probability distribution",
+      "Unsupervised Learning",
+      "Supervised Learning",
+      "Reinforcement Learning",
+      "Clustering"
+    ],
+    correctAnswer: 1
+  },
+  {
+    question: "What does a Decision Tree use to represent the features of a dataset?",
+    options: [
+      "Nodes",
+      "Edges",
+      "Vertices",
+      "Matrices"
+    ],
+    correctAnswer: 0
+  },
+  {
+    question: "What is the primary objective of the SVM algorithm?",
+    options: [
+      "To find the optimal hyperplane that separates data points",
       "To generate new data from existing data",
-      "To classify images into categories",
-      "To clean and preprocess data"
+      "To recognize objects in images",
+      "To translate text from one language to another"
     ],
     correctAnswer: 0
+  },
+  {
+    question: "Which algorithm works by storing the entire dataset and classifying new data points based on similarity?",
+    options: [
+      "Decision Tree",
+      "K-Nearest Neighbors",
+      "Support Vector Machines",
+      "Neural Networks"
+    ],
+    correctAnswer: 1
   }
 ];
 
-export default function Comprehension4() {
+export default function Comprehension3() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
   const [answers, setAnswers] = useState([]);
@@ -103,11 +103,7 @@ export default function Comprehension4() {
   return (
     <div className="bg-gray-900 min-h-screen flex flex-col justify-between">
       <Navbar />
-      <div className="flex-grow flex flex-col items-center justify-center py-12 sm:px-6 lg:px-8">
-      <button onClick={toggleSidebar}
-                    className="absolute top-6 left-6 p-2 text-white bg-gray-900 rounded-md shadow-lg hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500 z-50">
-                    <FaBars size={24} />
-                </button>
+        <div className="flex-grow flex flex-col items-center justify-center py-12 sm:px-6 lg:px-8">
           <SideNavbar isOpen={isOpen} toggleSidebar={toggleSidebar} />
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <h2 className="mt-16 text-center text-3xl leading-9 font-extrabold text-white">

@@ -10,8 +10,9 @@ const SideNavbar = () => {
   const chapters = [
     { number: 1, title: "Introduction to AI" },
     { number: 2, title: "AI Terms and Concepts" },
-    { number: 3, title: "Classification in AI" },
-    { number: 4, title: "Transformer Models" },
+    { number: 3, title: "Deep Learning" },
+    { number: 4, title: "Classification in AI" },
+    { number: 5, title: "Transformer Models" },
   ];
 
   const { isCollapsed, setIsCollapsed } = useContext(SidebarContext);
