@@ -129,7 +129,9 @@ const Chapter1 = () => {
               </div>
             </div>
           </main>
-        <Footer />
+          <div className="relative bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900">
+            <Footer />
+          </div>
         </div>
   );
 };

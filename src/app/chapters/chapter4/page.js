@@ -126,7 +126,7 @@ const Chapter3 = () => {
               ))}
               
               <div className="mt-12 text-center">
-                <Link href="/chapters/comprehension3" legacyBehavior>
+                <Link href="/chapters/comprehension4" legacyBehavior>
                   <a className="inline-block px-6 py-3 text-xl font-semibold text-white bg-blue-600 rounded-md shadow hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                     Take the Chapter 4 Test
                   </a>
