@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth, signOutUser } from '../firebase'; // Ensure the path to firebase.js is correct
+import { auth, signOutUser, getProgress, calculateRank } from '../firebase'; // Ensure the path to firebase.js is correct
 import FullWidthNavbar from '@/app/components/FullWidthNavbar';
 import Footer from "@/app/components/footer";
 import { motion } from 'framer-motion';
@@ -10,10 +10,20 @@ import { motion } from 'framer-motion';
 const Profile = () => {
   const [user] = useAuthState(auth);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [rank, setRank] = useState('Newbie');
 
   useEffect(() => {
     setIsLoaded(true);
-  }, []);
+    const fetchProgress = async () => {
+      const progress = await getProgress();
+      const calculatedRank = calculateRank(progress);
+      setRank(calculatedRank);
+    };
+
+    if (user) {
+      fetchProgress();
+    }
+  }, [user]);
 
   if (!user) {
     return (
@@ -40,6 +50,15 @@ const Profile = () => {
       </div>
     );
   }
+
+  const rankStyles = {
+    Newbie: 'bg-gray-300 text-gray-300 font-normal',
+    Beginner: 'bg-green-300 text-green-300 font-normal',
+    Intermediate: 'bg-blue-300 text-blue-300 font-semibold',
+    Advanced: 'bg-purple-300 text-purple-300 font-semibold italic',
+    Expert: 'bg-red-300 text-red-300 font-bold italic',
+    'AI Explorer': 'bg-yellow-300 text-yellow-300 font-extrabold italic underline',
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 relative">
@@ -69,14 +88,24 @@ const Profile = () => {
             className="bg-gray-800 py-8 px-4 shadow sm:rounded-lg sm:px-10"
           >
             <div className="flex flex-col items-center">
-              <motion.img 
-                src={user.photoURL} 
-                alt="Profile" 
-                className="w-24 h-24 rounded-full"
+              <motion.div 
+                className={`w-24 h-24 rounded-full ${rankStyles[rank].split(' ')[0]} p-1`}
+                style={{
+                  boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)',
+                  border: '2px solid #fff',
+                  borderRadius: '50%',
+                  backgroundColor: rankStyles[rank].split(' ')[0],
+                }}
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: isLoaded ? 1 : 0, scale: isLoaded ? 1 : 0.8 }}
                 transition={{ duration: 0.8, delay: 0.4 }}
-              />
+              >
+                <img 
+                  src={user.photoURL} 
+                  alt="Profile" 
+                  className="rounded-full"
+                />
+              </motion.div>
               <motion.h3 
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
@@ -97,9 +126,9 @@ const Profile = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 20 }}
                 transition={{ duration: 0.8, delay: 1 }}
-                className="mt-4 text-lg font-semibold text-white"
+                className={`mt-4 text-lg font-semibold ${rankStyles[rank].split(' ').slice(1).join(' ')}`}
               >
-                Rank: Newbie
+                Rank: {rank}
               </motion.p>
               <motion.button
                 onClick={signOutUser}

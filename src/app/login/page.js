@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth, signInWithGoogle, signOutUser } from '../firebase'; // Correct path to firebase.js
+import { auth, signInWithGoogle, signOutUser } from '../firebase';
 import FullWidthNavbar from '@/app/components/FullWidthNavbar';
 
 const Login = () => {

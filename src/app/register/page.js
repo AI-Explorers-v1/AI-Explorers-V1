@@ -1,45 +1,54 @@
 "use client";
 
-import React from 'react';
+import React, { useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth, db, signInWithGoogle, signOutUser } from '../firebase';
-import { doc, setDoc } from 'firebase/firestore';
-import Navbar from '../components/navbar'; // Adjust the path if necessary
+import { auth, signInWithGoogle, signOutUser, db } from '../firebase';
+import FullWidthNavbar from '@/app/components/FullWidthNavbar';
+import { setDoc, doc } from 'firebase/firestore';
 
 const Register = () => {
   const [user] = useAuthState(auth);
+  const [profile, setProfile] = useState({
+    name: '',
+    email: '',
+    profilePicture: '',
+  });
 
-  const registerUser = async () => {
-    try {
-      const userData = await signInWithGoogle();
-      console.log('User Data:', userData); // Debugging log
-      if (userData) {
-        // Use a combination of UID and displayName as the document ID
-        const documentId = `${userData.uid}-${userData.displayName.replace(/\s+/g, '_')}`;
-        const userRef = doc(db, 'users', documentId);
-        await setDoc(userRef, {
-          uid: userData.uid,
-          name: userData.displayName,
-          email: userData.email,
-          profilePicture: userData.photoURL,
-        });
-        console.log('User data written to Firestore');
-        localStorage.setItem('profilePicture', userData.photoURL); // Store profile picture URL in local storage
-      }
-    } catch (error) {
-      console.error("Error registering user: ", error);
+  const handleRegister = async () => {
+    if (user) {
+      const userDoc = doc(db, 'users', user.uid);
+      await setDoc(userDoc, {
+        name: profile.name,
+        email: user.email,
+        profilePicture: user.photoURL,
+        progress: {
+          chapter1: 'not started',
+          chapter2: 'not started',
+          chapter3: 'not started',
+          chapter4: 'not started',
+          chapter5: 'not started',
+        },
+      });
+      window.location.href = '/';
     }
+  };
+
+  const handleChange = (e) => {
+    setProfile({
+      ...profile,
+      [e.target.name]: e.target.value,
+    });
   };
 
   return (
     <div className="bg-gray-900 min-h-screen">
-      <Navbar />
+      <FullWidthNavbar />
       <div className="flex flex-col items-center justify-center py-12 sm:px-6 lg:px-8">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
           <h2 className="mt-12 text-center text-3xl font-extrabold text-white">Register</h2>
           <p className="mt-2 text-center text-sm text-gray-400">
             Or
-            <a href="/login" className="font-medium text-blue-600 hover:text-blue-500"> sign in to your account</a>
+            <a href="/login" className="font-medium text-blue-600 hover:text-blue-500"> login to your account</a>
           </p>
         </div>
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
@@ -47,12 +56,25 @@ const Register = () => {
             {user ? (
               <div>
                 <p className="text-center text-white">Welcome, {user.displayName}</p>
-                <button onClick={signOutUser} className="w-full mt-4 flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-                  Sign Out
+                <div className="mt-6">
+                  <label htmlFor="name" className="block text-sm font-medium text-gray-200">
+                    Name
+                  </label>
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    onChange={handleChange}
+                    value={profile.name}
+                    className="mt-1 p-2 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md bg-gray-700 text-white"
+                  />
+                </div>
+                <button onClick={handleRegister} className="w-full mt-4 flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                  Complete Registration
                 </button>
               </div>
             ) : (
-              <button onClick={registerUser} className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+              <button onClick={signInWithGoogle} className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
                 Register with Google
               </button>
             )}

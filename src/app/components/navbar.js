@@ -4,7 +4,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import Link from 'next/link';
 import { FaUserCircle } from 'react-icons/fa';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth, signOutUser } from '../firebase'; // Ensure this path is correct
+import { auth, signOutUser, getProgress } from '../firebase'; // Ensure this path is correct
 import { SidebarContext } from '../../../context/SidebarContext'; // You'll need to create this context
 
 function Navbar() {
@@ -13,6 +13,7 @@ function Navbar() {
   const [profilePicture, setProfilePicture] = useState(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { isCollapsed } = useContext(SidebarContext);
+  const [rank, setRank] = useState('Newbie');
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
@@ -30,8 +31,29 @@ function Navbar() {
       } else {
         setProfilePicture(user.photoURL); // Fallback to user photo URL from auth
       }
+
+      const fetchProgress = async () => {
+        const progress = await getProgress();
+        const completedChapters = Object.values(progress).filter(status => status === 'completed').length;
+        const ranks = ["Newbie", "Beginner", "Intermediate", "Advanced", "Expert", "AI Explorer"];
+        setRank(ranks[completedChapters]);
+      };
+
+      fetchProgress();
+    } else {
+      setProfilePicture(null);
+      setRank('Newbie');
     }
   }, [user]);
+
+  const rankStyles = {
+    Newbie: 'bg-gray-300',
+    Beginner: 'bg-green-300',
+    Intermediate: 'bg-blue-300',
+    Advanced: 'bg-purple-300',
+    Expert: 'bg-red-300',
+    'AI Explorer': 'bg-yellow-300',
+  };
 
   return (
     <nav className={`bg-gray-900 text-white sticky top-0 z-50 transition-all duration-300 ease-in-out ${isCollapsed ? 'ml-20' : 'ml-64'}`}>
@@ -77,7 +99,9 @@ function Navbar() {
             className="flex items-center focus:outline-none"
           >
             {profilePicture ? (
-              <img src={profilePicture} alt="Profile" className="rounded-full w-10 h-10" />
+              <div className={`w-10 h-10 rounded-full ${rankStyles[rank]} p-1`} style={{ boxShadow: '0 4px 8px rgba(0, 0, 0, 0.3)', border: '2px solid #fff', borderRadius: '50%', backgroundColor: rankStyles[rank] }}>
+                <img src={profilePicture} alt="Profile" className="rounded-full" />
+              </div>
             ) : (
               <FaUserCircle size={30} />
             )}
@@ -92,6 +116,9 @@ function Navbar() {
                   <button
                     onClick={() => {
                       signOutUser();
+                      localStorage.removeItem('profilePicture'); // Clear profile picture from local storage
+                      setProfilePicture(null); // Clear profile picture state
+                      setRank('Newbie'); // Reset rank
                       setDropdownOpen(false);
                     }}
                     className="block w-full text-left px-4 py-2 text-gray-300 hover:bg-gray-700 hover:text-white rounded-md"
