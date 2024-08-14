@@ -1,12 +1,13 @@
 'use client';
 
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import Link from "next/link";
-import { Book, Home, ChevronLeft, ChevronRight } from 'lucide-react';
-import { SidebarContext } from '/context/SidebarContext'
+import { Book, Home, ChevronLeft, ChevronRight, CheckCircle, AlertCircle, Circle } from 'lucide-react';
+import { SidebarContext } from '/context/SidebarContext';
+import { auth, getProgress } from '../firebase'; // Ensure the path to firebase.js is correct
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 const SideNavbar = () => {
-
   const chapters = [
     { number: 1, title: "Introduction to AI" },
     { number: 2, title: "AI Terms and Concepts" },
@@ -16,9 +17,29 @@ const SideNavbar = () => {
   ];
 
   const { isCollapsed, setIsCollapsed } = useContext(SidebarContext);
+  const [user] = useAuthState(auth);
+  const [progress, setProgress] = useState({});
 
   const toggleSidebar = () => {
     setIsCollapsed(!isCollapsed);
+  };
+
+  useEffect(() => {
+    const fetchProgress = async () => {
+      if (user) {
+        const userProgress = await getProgress();
+        setProgress(userProgress);
+      }
+    };
+
+    fetchProgress();
+  }, [user]);
+
+  const getIcon = (chapterNumber) => {
+    const status = progress[`chapter${chapterNumber}`];
+    if (status === 'completed') return <CheckCircle className="text-green-500" />;
+    if (status === 'incomplete') return <AlertCircle className="text-red-500" />;
+    return <Circle className="text-gray-500" />;
   };
 
   return (
@@ -38,7 +59,7 @@ const SideNavbar = () => {
             {chapters.map((chapter) => (
               <li key={chapter.number} className="mb-2">
                 <Link href={`/chapters/chapter${chapter.number}/`} className={`flex items-center px-6 py-3 text-gray-700 hover:bg-blue-50 hover:text-blue-700 transition-colors duration-200 ${isCollapsed ? 'justify-center' : ''}`}>
-                  <Book className={isCollapsed ? 'mr-0' : 'mr-3'} />
+                  <span className="mr-3">{getIcon(chapter.number)}</span>
                   {!isCollapsed && (
                     <span>
                       Chapter {chapter.number}

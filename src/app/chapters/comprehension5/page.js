@@ -1,10 +1,12 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Navbar from "@/app/components/navbar";
 import Footer from "@/app/components/footer";
 import SideNavbar from "@/app/components/SideNavbar";
 import { FaBars } from 'react-icons/fa'; 
+import { auth, saveProgress } from '../../firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 const questions = [
   {
@@ -59,12 +61,13 @@ const questions = [
   }
 ];
 
-export default function Comprehension4() {
+export default function Comprehension5() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
   const [answers, setAnswers] = useState([]);
   const [score, setScore] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [user] = useAuthState(auth);
 
   const toggleSidebar = () => {
     setIsOpen(!isOpen);
@@ -96,11 +99,18 @@ export default function Comprehension4() {
     setScore(percentageScore);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (currentQuestion === questions.length) {
       calculateScore();
     }
   }, [currentQuestion]);
+
+  useEffect(() => {
+    if (score !== null && user) {
+      const status = score === 100 ? 'completed' : 'incomplete';
+      saveProgress('chapter5', status);
+    }
+  }, [score, user]);
 
   return (
     <div className="bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 min-h-screen flex flex-col justify-between">

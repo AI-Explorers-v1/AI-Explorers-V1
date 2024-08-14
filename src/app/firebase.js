@@ -1,7 +1,7 @@
 // src/firebase.js
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signOut } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
+import { getFirestore, doc, getDoc, setDoc } from 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: "AIzaSyDqRkT6rvNNLrzNeT5OZzqa4HTK6bC6WZ8",
@@ -38,4 +38,40 @@ const signOutUser = async () => {
   }
 };
 
-export { auth, db, signInWithGoogle, signOutUser, signInWithEmailAndPassword};
+// New functions
+const saveProgress = async (chapter, status) => {
+  try {
+    const user = auth.currentUser;
+    if (!user) throw new Error("No user signed in");
+    const userDoc = doc(db, 'users', user.uid);
+    const userSnapshot = await getDoc(userDoc);
+    if (userSnapshot.exists()) {
+      const existingProgress = userSnapshot.data().progress || {};
+      await setDoc(userDoc, { progress: { ...existingProgress, [chapter]: status } }, { merge: true });
+    } else {
+      await setDoc(userDoc, { progress: { [chapter]: status } });
+    }
+  } catch (error) {
+    console.error("Error saving progress: ", error);
+  }
+};
+
+const getProgress = async () => {
+  try {
+    const user = auth.currentUser;
+    if (!user) throw new Error("No user signed in");
+    const userDoc = doc(db, 'users', user.uid);
+    const userSnapshot = await getDoc(userDoc);
+    if (userSnapshot.exists()) {
+      const data = userSnapshot.data();
+      return data.progress || {};
+    } else {
+      return {};
+    }
+  } catch (error) {
+    console.error("Error getting progress: ", error);
+    return {};
+  }
+};
+
+export { auth, db, signInWithGoogle, signOutUser, signInWithEmailAndPassword, saveProgress, getProgress };
